@@ -24,11 +24,11 @@ struct ContentView: View {
             }
             .tag(0)
             NavigationView {
-                PokeTypes()
+                PokemonTypeListView()
             }
             .tabItem {
                 Image(systemName: "square.grid.3x3.fill")
-                Text("Categories")
+                Text("Types")
             }
             .tag(0)
         }

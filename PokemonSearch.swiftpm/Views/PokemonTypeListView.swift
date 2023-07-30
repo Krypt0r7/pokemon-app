@@ -1,13 +1,7 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Victor Ronnerstedt on 2023-07-27.
-//
 
 import SwiftUI
 
-struct PokeTypes: View {
+struct PokemonTypeListView: View {
     @State private var pokeTypes: PokemonTypes?
     
     private let pokeService = PokemonService()
@@ -20,7 +14,7 @@ struct PokeTypes: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(pokeTypes?.results ?? [], id: \.name) { type in
-                    NavigationLink(destination: TypePokemon(url: type.url, name: type.name)) {
+                    NavigationLink(destination: PokemonListView(url: type.url, name: type.name)) {
                         HStack {
                             Image(type.name)
                                 .resizable()
@@ -30,7 +24,7 @@ struct PokeTypes: View {
                     }
                     .padding(10)
                     .foregroundColor(.white)
-                    .background(Color.cyan)
+                    .background(Color.secondary)
                     .cornerRadius(.infinity)
 
                 }
@@ -47,8 +41,8 @@ struct PokeTypes: View {
     }
 }
 
-struct PokeTypes_Previews: PreviewProvider {
+struct PokemonTypeListView_Previews: PreviewProvider {
     static var previews: some View {
-        PokeTypes()
+        PokemonTypeListView()
     }
 }

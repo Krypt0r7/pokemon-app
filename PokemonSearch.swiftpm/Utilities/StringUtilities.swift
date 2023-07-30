@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct StringUtilities {
-    func capitalizeFirstLetter(_ input: String) -> String {
-       guard !input.isEmpty else {
-           return input
+extension String {
+    func capitalizeFirstLetter() -> String {
+       guard !isEmpty else {
+           return self
        }
-       let firstChar = input.prefix(1).capitalized
-       let remainingChars = input.dropFirst()
+       let firstChar = prefix(1).capitalized
+       let remainingChars = dropFirst()
        return firstChar + remainingChars
     }
 }

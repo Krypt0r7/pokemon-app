@@ -48,7 +48,6 @@ struct PokemonService {
         let decoder = JSONDecoder()
         do {
             let result = try decoder.decode(T.self, from: data)
-            print(result)
             return result
         } catch {
             throw error

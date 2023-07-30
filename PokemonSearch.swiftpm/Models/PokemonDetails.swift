@@ -19,7 +19,7 @@ struct AbilityDetails: Codable {
 }
 
 struct Home: Codable {
-    let frontDefault: String
+    let frontDefault: String?
     
     private enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
@@ -27,7 +27,7 @@ struct Home: Codable {
 }
 
 struct Other: Codable {
-    let home: Home
+    let home: Home?
 }
 
 
