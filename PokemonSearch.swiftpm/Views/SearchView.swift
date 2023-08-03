@@ -3,37 +3,24 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var searchText = ""
+    @State private var toBeSearched = ""
     @State private var pokemonDetails: PokemonDetails?
 
     private let pokemonService = PokemonService()
     var body: some View {
         VStack {
-            if let details = pokemonDetails {
-                VStack {
-                    Text("\(details.name.capitalizeFirstLetter()) #\(details.order)" )
-                        .font(.largeTitle)
-                    
-                    AsyncImage(url: URL(string: details.sprites.other.home?.frontDefault ?? ""), scale: 2)
-                    Section(header: Text("Abilities").font(.headline)) {
-                        List(details.abilities, id: \.ability.name) {ability in
-                            Text(ability.ability.name)
-                        }
-                    }
-                }
+            if toBeSearched != "" {
+                PokemonView(name: toBeSearched)
             }
         }
         .navigationTitle("Search")
         .searchable(text: $searchText, prompt: "Search for pokemon")
         .onSubmit(of: .search) {
-            Task {
-                do {
-                    self.pokemonDetails = try await pokemonService.getPokemon(for: searchText)
-                }
-            }
+           toBeSearched = searchText
         }
         .onChange(of: searchText) { value in
             if searchText.isEmpty {
-                pokemonDetails = nil
+                toBeSearched = ""
             }
         }
         .autocorrectionDisabled(true)

@@ -35,7 +35,7 @@ struct PokemonTypeListView: View {
             do {
                 self.pokeTypes = try await pokeService.getTypes()
             } catch {
-                print("Not able to fetch")
+                print("Not able to fetch ", error)
             }
         }
     }

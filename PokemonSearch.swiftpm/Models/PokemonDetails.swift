@@ -8,6 +8,8 @@ struct PokemonDetails: Codable {
     let weight: Int
     let sprites: Sprites
     let abilities: [Ability]
+    let moves: [MoveDetails]
+    let types: [TypeDetails]
 }
 
 struct Ability: Codable {
@@ -33,4 +35,23 @@ struct Other: Codable {
 
 struct Sprites: Codable {
     let other: Other
+}
+
+struct MoveDetails: Codable {
+    let move: Move
+}
+
+struct Move: Codable {
+    let name: String
+    let url: URL
+}
+
+struct TypeDetails: Codable {
+    let slot: Int
+    let type: Type
+}
+
+struct Type: Codable {
+    let name: String
+    let url: URL
 }

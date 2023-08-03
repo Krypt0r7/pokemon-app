@@ -16,8 +16,10 @@ struct PokemonService {
         }
 
         let (data, _) = try await URLSession.shared.data(from: url)
+        let pokemon: PokemonDetails = try decode(data)
+        print(pokemon)
+        return pokemon
         
-        return try decode(data)
     }
     
     func getTypes() async throws -> PokemonTypes {
