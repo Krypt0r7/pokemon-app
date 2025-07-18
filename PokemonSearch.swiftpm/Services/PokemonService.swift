@@ -46,6 +46,26 @@ struct PokemonService {
         return pokeType
     }
     
+    // MARK: - Generic Fetch Function for Pagination
+    func fetch<T: Decodable>(from url: URL) async throws -> T {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try decode(data)
+    }
+    
+    // MARK: - Paginated Pokemon List Function
+    func fetchPokemon(from url: URL) async throws -> PokemonListResponse {
+        return try await fetch(from: url)
+    }
+    
+    // Convenience method to fetch the first page
+    func fetchPokemonList(limit: Int = 20, offset: Int = 0) async throws -> PokemonListResponse {
+        let urlString = "https://pokeapi.co/api/v2/pokemon?limit=\(limit)&offset=\(offset)"
+        guard let url = URL(string: urlString) else {
+            throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+        }
+        return try await fetchPokemon(from: url)
+    }
+    
     func decode<T: Decodable>(_ data: Data ) throws -> T {
         let decoder = JSONDecoder()
         do {

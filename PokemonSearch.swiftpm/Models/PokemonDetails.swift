@@ -6,10 +6,17 @@ struct PokemonDetails: Codable {
     let height: Int
     let order: Int
     let weight: Int
+    let baseExperience: Int?
     let sprites: Sprites
     let abilities: [Ability]
     let moves: [MoveDetails]
     let types: [TypeDetails]
+    let stats: [StatDetails]
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, name, height, order, weight, sprites, abilities, moves, types, stats
+        case baseExperience = "base_experience"
+    }
 }
 
 struct Ability: Codable {
@@ -52,6 +59,22 @@ struct TypeDetails: Codable {
 }
 
 struct Type: Codable {
+    let name: String
+    let url: URL
+}
+
+struct StatDetails: Codable {
+    let baseStat: Int
+    let effort: Int
+    let stat: Stat
+    
+    private enum CodingKeys: String, CodingKey {
+        case effort, stat
+        case baseStat = "base_stat"
+    }
+}
+
+struct Stat: Codable {
     let name: String
     let url: URL
 }

@@ -13,8 +13,8 @@ struct PokemonListView: View {
         Group {
             if let pokemonType {
                 List(pokemonType.pokemon, id: \.pokemon.name){ result in
-                    NavigationLink(result.pokemon.name.uppercased()) {
-                        PokemonView(name: result.pokemon.name)
+                    NavigationLink(destination: PokemonView(name: result.pokemon.name)) {
+                        PokemonListItemView(pokemon: Pokemon(name: result.pokemon.name, url: result.pokemon.url))
                     }
                 }
             } else {
