@@ -15,6 +15,8 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: swift build -v --build-path ../PokemonSearch.swiftpm
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Build Swift Package
+      working-directory: PokemonSearch.swiftpm
+      run: swift build -v
